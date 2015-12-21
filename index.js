@@ -17,7 +17,7 @@ module.exports = function(source) {
   this.cacheable && this.cacheable();
   var query = loaderUtils.parseQuery(this.query);
 
-  docs = docgen.parse(source, findAllComponentDefinitions);
+  var docs = docgen.parse(source, findAllComponentDefinitions);
   if (query.markdownDescription) {
     formatDescription(docs);
 
