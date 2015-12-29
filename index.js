@@ -18,13 +18,19 @@ module.exports = function(source) {
   var query = loaderUtils.parseQuery(this.query);
 
   var docs = docgen.parse(source, findAllComponentDefinitions);
-  if (query.markdownDescription) {
-    formatDescription(docs);
 
-    for (var propName in docs.props) {
-      formatDescription(docs.props[propName]);
+  if (docs.length > 0) {
+    var componentDocs = docs[0];
+    if (query.markdownDescription) {
+      formatDescription(componentDocs);
+
+      for (var propName in componentDocs.props) {
+        formatDescription(componentDocs.props[propName]);
+      }
     }
   }
+
+  this.values = [docs];
 
   return 'module.exports = ' + JSON.stringify(docs) + ';';
 };
